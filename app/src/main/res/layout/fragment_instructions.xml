@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.instructions.InstructionsFragment">
+
+    <data>
+
+        <variable
+            name="onGetStartedButtonClicked"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <!-- A LinearLayout is better here since there are only two vertically stacked children -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title_text"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/instructions"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/instructions_card"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="@color/lightGrey"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp">
+
+            <!-- Though the layout looks a bit complex visually, a lot of complexity
+                 was avoided because of the use of text drawables. With that out of
+                 the box, all we have now is a set of vertically stacked views. That's
+                 why LinearLayout was chosen here. -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="32dp"
+                android:paddingTop="32dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    style="@style/InstructionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/instruction_edit_item"
+                    app:drawableStartCompat="@drawable/ic_click" />
+
+                <TextView
+                    style="@style/InstructionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/instruction_add_item"
+                    app:drawableStartCompat="@drawable/ic_add" />
+
+                <TextView
+                    style="@style/InstructionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/instructions_save_item"
+                    app:drawableStartCompat="@drawable/ic_save" />
+
+                <TextView
+                    style="@style/InstructionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/instruction_delete_item"
+                    app:drawableStartCompat="@drawable/ic_delete" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"
+                    android:onClick="@{onGetStartedButtonClicked}"
+                    android:text="@string/get_started_button" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</layout>

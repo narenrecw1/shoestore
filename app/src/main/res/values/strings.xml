@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">ShoeStore</string>
+    <string name="shoe_store_logo">Shoe Store Logo</string>
+    <string name="shoe_store_title">Styles Shoe Store</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="login_or_register">Login / Register</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_username">Welcome %s!</string>
+    <string name="welcome_text">Welcome to the Shoe Store Inventory.\n\nNow you can manage the inventory more easily!</string>
+    <string name="get_started_button">Get Started</string>
+    <string name="instructions">Instructions</string>
+    <string name="add_item">Add Item</string>
+    <string name="shoe_image">Shoe image</string>
+    <string name="shoe_title">Shoe Title</string>
+    <string name="shoe_company">Shoe Company</string>
+    <string name="shoe_size">Shoe Size</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="dialog_header">Dialog Header</string>
+    <string name="logout">Logout</string>
+    <string name="instruction_edit_item">Click on item cards to edit them</string>
+    <string name="instruction_add_item">Clicking on plus adds a new item</string>
+    <string name="instructions_save_item">Click to save changes to item</string>
+    <string name="instruction_delete_item">Click to delete the item from list</string>
+</resources>

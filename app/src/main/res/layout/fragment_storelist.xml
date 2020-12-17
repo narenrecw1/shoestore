@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.storelist.StoreListFragment">
+
+    <data>
+
+        <variable
+            name="onAddFabClicked"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <!-- Using a simple FrameLayout here, since it is nothing but a depth based
+         stack of views. It wins on both LinearLayout and ConstraintLayout. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/items_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="@string/add_item"
+            android:onClick="@{onAddFabClicked}"
+            android:src="@drawable/ic_add" />
+
+    </FrameLayout>
+</layout>

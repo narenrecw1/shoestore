@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.details.ItemDetailsEditorFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.udacity.shoestore.ui.details.ItemDetailsEditorViewModel" />
+
+        <variable
+            name="onSaveButtonClicked"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onCancelButtonClicked"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onDeleteButtonClicked"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="16dp">
+
+            <!-- This dialog layout is a bit complex layout. If we think in a
+                 traditional uni-directional stack model, we'd be needing one
+                 vertical stack (LinearLayout) with three horizontal stacks,
+                 and one dummy view for the spacing between delete button and
+                 other buttons. That's three levels of nesting, and can be
+                 reduced to one level by using ConstraintLayout. It's simple
+                 and also efficient when laying out. -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/dialog_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/gradient_background"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/dialog_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/dialog_header"
+                    android:paddingHorizontal="16dp"
+                    app:imageResource="@{viewModel.dialogIcon}"
+                    app:layout_constraintBottom_toBottomOf="@id/dialog_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/dialog_header"
+                    app:tint="@android:color/white"
+                    tools:src="@drawable/ic_edit" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.dialogTitle}"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/dialog_header"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/dialog_icon"
+                    app:layout_constraintTop_toTopOf="@id/dialog_header"
+                    tools:text="@string/edit_item" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shoe_title_edit_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/shoe_title"
+                    app:layout_constraintTop_toBottomOf="@id/dialog_header">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.shoeTitle}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shoe_company_edit_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/shoe_company"
+                    app:layout_constraintEnd_toEndOf="@id/shoe_title_edit_text"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/shoe_size_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/shoe_title_edit_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel.shoeCompany}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/shoe_size_edit_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="6dp"
+                    android:hint="@string/shoe_size"
+                    app:layout_constraintEnd_toStartOf="@id/shoe_company_edit_text"
+                    app:layout_constraintStart_toStartOf="@id/shoe_title_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/shoe_title_edit_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:text="@={viewModel.shoeSize}" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:id="@+id/separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="24dp"
+                    android:background="@color/lightGrey"
+                    app:layout_constraintTop_toBottomOf="@id/shoe_company_edit_text" />
+
+                <Button
+                    android:id="@+id/save_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:onClick="@{onSaveButtonClicked}"
+                    android:text="@string/save"
+                    app:icon="@drawable/ic_save"
+                    android:enabled="@{viewModel.canSave}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/shoe_title_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/separator" />
+
+                <Button
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="@{onCancelButtonClicked}"
+                    android:text="@string/cancel"
+                    app:layout_constraintEnd_toStartOf="@id/save_button"
+                    app:layout_constraintTop_toTopOf="@id/save_button" />
+
+                <Button
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="0dp"
+                    android:layout_marginStart="0dp"
+                    android:backgroundTint="@color/watchableRed"
+                    android:onClick="@{onDeleteButtonClicked}"
+                    android:visibility="@{viewModel.deleteButtonVisibility}"
+                    app:icon="@drawable/ic_delete"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconTint="@android:color/white"
+                    app:layout_constraintStart_toStartOf="@id/shoe_title_edit_text"
+                    app:layout_constraintTop_toTopOf="@id/save_button" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
+</layout>
